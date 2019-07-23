@@ -371,7 +371,7 @@
         Luis Ferney Sandoval Fuentes\\
 \textit{Ingenieria de Sistemas y Computacion\\ Universidad Nacional de Colombia}
 \texttt{\\ejjimenezc@unal.edu.co}
-\texttt{\\lssandovalf@unal.edu.co}
+\texttt{\\lfsandovalf@unal.edu.co}
 }
 
 
@@ -420,7 +420,7 @@ Este documento planea mostrar las características que hacen que un proyecto en 
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Proyecto, Kaggle, Kickstarter, Prediccion, Clasificacion, Machine Learning, Red Neuronal
+Proyecto, Kaggle, Kickstarter, Predicción, Clasificación, Machine Learning, Red Neuronal
 \end{IEEEkeywords}
 
 
@@ -456,15 +456,19 @@ Proyecto, Kaggle, Kickstarter, Prediccion, Clasificacion, Machine Learning, Red 
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{H}{hay} situaciones en las que una persona tiene una gran idea, pero no sabe donde poder conseguir ayuda para poder construir su idea. Kickstarter es una plataforma para fondos de ideas creativas donde estas personas pueden crear una campaña con su idea y recolectar fondos que dan otras personas dentro de esta plataforma. Kickstarter tiene una gran cantidad de categorias que van desde Musica, Danza hasta juegos y tecnologia. En esta plataforma se puede dar vida mediante el apoyo de otras personas a ideas que podrian haber quedado en el olvido.
+\IEEEPARstart{H}{ay} situaciones en las que una persona tiene una gran idea, pero no sabe donde poder conseguir ayuda para poder construir su idea. Kickstarter es una plataforma para fondos de ideas creativas donde estas personas pueden crear una campaña con su idea y recolectar fondos que dan otras personas dentro de esta plataforma. Kickstarter tiene una gran cantidad de categorías que van desde Musica, Danza hasta juegos y tecnología. En esta plataforma se puede dar vida mediante el apoyo de otras personas a ideas que podrian haber quedado en el olvido.
 
-Si una persona quiere buscar apoyo para su idea dentro de esta plataforma, sabe que necesita cierta candidad de dinero para hacer realidad su idea, pero no sabe si con esa cantidad que pide va a poder conseguirla dentro de la plataforma, ya que hay bastantes categorias y unas son mas populares que otras. En este documento se planea mostrar una exploracion de las caracteristicas con las que inicia un proyecto, y como estas pueden afectar el exito o fracaso de un proyecto en Kickstarter, ademas basado en estas caracteristicas, el como se implemento un clasificador con los datos de mas de 400.000 proyectos en Kickstarter. 
+Si una persona quiere buscar apoyo para su idea dentro de esta plataforma, sabe que necesita cierta cantidad de dinero para hacer realidad su idea, pero no sabe si con esa cantidad que pide va a poder conseguirla dentro de la plataforma, ya que hay bastantes categorías y unas son mas populares que otras. En este documento se planea mostrar una exploración de las caracteristicas con las que inicia un proyecto, y como estas pueden afectar el exito o fracaso de un proyecto en Kickstarter, ademas basado en estas características, el como se implemento un clasificador con los datos de mas de 400.000 proyectos en Kickstarter. 
 
 \section{Exploración de los datos}
-Aqui se habla sobre los datos del Dataset
+Para poder volver realidad una idea, se necesita dinero con tal de cubrir los costos necesarios. A veces las personas no tienen de donde conseguirlo así que van y buscan plataformas tales como Kickstarter donde pueden conseguir el apoyo que necesitan de personas que les parezca interesante el proyecto. Un proyecto en Kickstarter, cuando se lanza, y lo capturado por el Dataset usado en nuestro modelo de predicción, debe de tener una meta la cual es la cantidad de Dinero necesario, segun el dueño de la campana, para poder llevar a cabo su idea. También tenemos la fecha de lanzamiento del proyecto, y la fecha de culminación donde se deja de recolectar el dinero, es el tiempo máximo en el que termina la recolección de fondos.
+
+Otro valor encontrado en el dataset, el cual puede ser usado para el analisis de  exito, es la moneda, donde se añade otra columna que adapta las metas en dinero de cada proyecto en dolares.
+
+Dentro del dataset habian caracteristicas que fueron tomadas al finalizar la campaña, como por ejemplo el estado de la campaña, donde se dice si una campaña fue exitosa o no, si fue cancelada o suspendida, etc. Tambien se tomo la cantidad de Backers (Personas que apoyaron la campaña) y la cantidad de dinero recolectado al finalizar. Debido a que estos datos no existen cuando se planea crear un proyecto, fueron ignorados a excepcion de la caracteristica que representa el estado del proyecto.
 
 \section{Factores de Exito o Fracaso}
-Aqui se habla de los analisis que definen si un proceso sera exitoso o no
+Se realizaron multiples analisis graficos de cada una de las caracteristicas que existen antes de publicar la campaña, donde se compararon entre proyectos exitosos y fallidos.
 
 \section{Prediciendo el exito de un proyecto}
 Aqui se pone lo que se uso para el clasificador
