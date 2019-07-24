@@ -419,12 +419,12 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-Este documento planea mostrar las características que hacen que un proyecto en Kickstarter sea exitoso, además de como se genero un clasificador que basado en estas características, puede predecir si dado un proyecto con ciertas características va a tener éxito o no.
+Este documento planea mostrar las características que hacen que un proyecto en Kickstarter sea exitoso o sea fallido, además de explicar la implementacion de un clasificador que basado en estas características, puede predecir si dado un proyecto puede tener exito o no.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Proyecto, Kaggle, Kickstarter, Predicción, Clasificación, Machine Learning, Red Neuronal
+Proyecto, Kaggle, Kickstarter, Predicción, Clasificación, Machine Learning, Red Neuronal, Caracteristicas
 \end{IEEEkeywords}
 
 
@@ -462,38 +462,37 @@ Proyecto, Kaggle, Kickstarter, Predicción, Clasificación, Machine Learning, Re
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{H}{ay} situaciones en las que una persona tiene una gran idea, pero no sabe donde poder conseguir ayuda para poder construir su idea. Kickstarter es una plataforma para fondos de ideas creativas donde estas personas pueden crear una campaña con su idea y recolectar fondos que dan otras personas dentro de esta plataforma. Kickstarter tiene una gran cantidad de categorías que van desde Musica, Danza hasta juegos y tecnología. En esta plataforma se puede dar vida mediante el apoyo de otras personas a ideas que podrían haber quedado en el olvido.
 
-Si una persona quiere buscar apoyo para su idea dentro de esta plataforma, sabe que necesita cierta cantidad de dinero para hacer realidad su idea, pero no sabe si con esa cantidad que pide va a poder conseguirla dentro de la plataforma, ya que hay bastantes categorías y unas son mas populares que otras. En este documento se planea mostrar una exploración de las características con las que inicia un proyecto, y como estas pueden afectar el exito o fracaso de un proyecto en Kickstarter, además basado en estas características, el como se implemento un clasificador con los datos de mas de 400.000 proyectos en Kickstarter. 
+Si una persona quiere buscar apoyo para su idea dentro de esta plataforma, sabe que necesita cierta cantidad de dinero para hacer realidad su idea, pero no sabe si con esa cantidad que pide va a poder conseguirla dentro de la plataforma, ya que hay bastantes categorías y unas son mas populares que otras. En este documento se planea mostrar una exploración de las características con las que inicia una campaña, y como estas pueden afectar el éxito o fracaso de una campaña en Kickstarter, además basado en estas características, el como se implemento un clasificador con los datos de cerca de 400.000 campañas en Kickstarter. 
 
 \section{Exploración de los datos}
-Para poder volver realidad una idea, se necesita dinero con tal de cubrir los costos necesarios. A veces las personas no tienen de donde conseguirlo así que van y buscan plataformas tales como Kickstarter donde pueden conseguir el apoyo que necesitan de personas que les parezca interesante el proyecto. Un proyecto en Kickstarter, cuando se lanza, y es capturado por el Dataset usado en nuestro modelo de predicción, debe de tener una meta la cual es la cantidad de Dinero necesario, establecida según criterios del dueño de la campaña, para poder llevar a cabo su idea. También tenemos la fecha de lanzamiento del proyecto, y la fecha de culminación donde se deja de recolectar el dinero, es el tiempo máximo en el que termina la recolección de fondos. Otro valor encontrado en el dataset, el cual puede ser usado para el análisis de  éxito, es la moneda en la cual recoge fondos originalmente el proyecto, donde se incluye otra columna que convierte las metas en dinero de cada proyecto en dolares.
+Para poder volver realidad una idea, se necesita dinero con tal de cubrir los costos necesarios. A veces las personas no tienen de donde conseguirlo así que van y buscan plataformas tales como Kickstarter donde pueden conseguir el apoyo que necesitan de personas que les parezca interesante el proyecto. Un proyecto en Kickstarter, cuando se lanza, y es capturado por el Dataset usado en nuestro modelo de predicción, debe de tener una meta la cual es la cantidad de Dinero necesario, establecida según criterios del dueño de la campaña, para poder llevar a cabo su idea. También tenemos la fecha de lanzamiento del proyecto, y la fecha de culminación donde se deja de recolectar el dinero, es el tiempo máximo en el que termina la recolección de fondos. Otro valor encontrado en el dataset, el cual puede ser usado para el análisis de  éxito, es la moneda en la cual recoge fondos originalmente el proyecto, donde se incluye otra columna que convierte las metas en dinero de cada campaña en dolares.
 
-Dentro del dataset habían características que fueron tomadas al finalizar la campaña, como por ejemplo el estado de la campaña, donde se dice si una campaña fue exitosa o no, si fue cancelada o suspendida, etc. Tambien se tomo la cantidad de Backers (Personas que apoyaron la campaña) y la cantidad de dinero recolectado al finalizar. Debido a que estos datos no existen cuando se planea crear un proyecto, fueron ignorados a excepción de la característica que representa el estado del proyecto.
+Dentro del dataset habían características que fueron tomadas al finalizar la campaña, como por ejemplo el estado de la campaña, donde se dice si una campaña fue exitosa o no, si fue cancelada o suspendida, etc. También se tomo la cantidad de Backers (Personas que apoyaron la campaña) y la cantidad de dinero recolectado al finalizar. Debido a que estos datos no existen cuando se planea crear una campaña, fueron ignorados a excepción de la característica que representa el estado de la campaña.
 
-Algunos de los comportamientos interesantes se encuentra en Categorias y Categorias Principales, donde la primera tiene 159 elementos mientras la segunda tiene solo 15, el comportamiento de las 40 categorias principales y las categorias principales son similares, pero como tal la categoria principal no representa muy bien la popularidad de las categorias que tiene dentro, por ejemplo, en la categori principal de musica, la subcategoria "Music" tiene una gran cantidad de proyectos a comparacion de las demas subcategorias.
-
+Algunos de los comportamientos interesantes se encuentra en Categorías y Categorías Principales, donde la primera tiene 159 elementos mientras la segunda tiene solo 15, el comportamiento de las 40 categorías principales y las categorías principales son similares, pero como tal la categoría principal no representa muy bien la popularidad de las categorías que tiene en su interior, por ejemplo, en la categoría principal de musica, la sub-categoría "Music" tiene una gran cantidad de proyectos a comparación de las demás sub-categorías.
 
 \begin{figure}[H]
     \centering
     \captionsetup{justification=centering}
     \includegraphics[width=\linewidth]{Images/Categorias.PNG}
-    \caption{Popularidad de las Categorias Principales}
+    \caption{Popularidad de las Categorías Principales}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \captionsetup{justification=centering}
 \includegraphics[width=\linewidth]{Images/40Categorias.PNG}
-    \caption{20 Categorias Basicas mas populares}
+    \caption{20 Categorías Básicas mas populares}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \captionsetup{justification=centering}
 \includegraphics[width=\linewidth]{Images/CategoriasMusic.PNG}
-    \caption{Subcategorias de la categoria "Music"}
+    \caption{Sub-Categorías de la categoría principal "Music"}
 \end{figure}
 
-Otro dato interestante se encuentra en la proporcion de campañas canceladas, exitosas, fallidas, entre otros. Aqui la mayor parte de los datos esta conformado por estos 3 primeros mientras que los demas estados representan solo un 3\% de los datos totales. Ademas el 78\% de las campañas usaron como moneda para la campaña el dolar, ademas este porcentaje es muy similar al porcentaje de proyectos de US.
+Otro dato interesante se encuentra en la proporción de campañas canceladas, exitosas, fallidas, entre otros. Aquí la mayor parte de los datos esta conformado por estos 3 primeros mientras que los demás estados representan solo un 3\% de los datos totales. Además el 78\% de las campañas usaron como moneda para la campaña el dolar, además este porcentaje es muy similar al porcentaje de proyectos de US.
 
 \begin{figure}[H]
     \centering
@@ -518,15 +517,18 @@ Otro dato interestante se encuentra en la proporcion de campañas canceladas, ex
     \caption{Estados de las campañas}
 \end{figure}
 
-Todas estas categorias son las que ayudan a predecir, antes de que una campaña sea lanzada, si tendra exito o no.
+Todas estas categorías son las que ayudan a predecir, antes de que una campaña sea lanzada, si tendrá éxito o no.
 
-\section{Factores de Exito o Fracaso}
-Se realizaron múltiples analisis gráficos de cada una de las características que existen antes de publicar la campaña, donde se compararon entre proyectos exitosos y fallidos. Se pudieron apreciar comportamientos los cuales diferenciaban a las campañas exitosas de las que tienden a fallar.
+\section{Factores de Éxito o Fracaso}
+Se realizaron múltiples análisis al comportamiento de cada una de las características que existen antes de publicar la campaña, donde se compararon entre proyectos exitosos y fallidos. Se pudieron apreciar comportamientos los cuales diferenciaban a las campañas exitosas de las que tienden a fallar.
 
+Aunque el objetivo es determinar si una campaña sera exitosa o no, dentro de los datos, el porcentaje de proyectos cancelados no puede ser ignorado, así que se comparo el comportamiento de estas campañas con las exitosas y las fallidas, basándonos en si se recaudo el dinero objetivo o no.
 
-Podemos observar la comparación entre el promedio del dinero recogido en cada uno de los casos de éxito, fracaso o cancelación de un proyecto y este conjunto de datos tiene la mayor proporción.
-Lamentablemente es desconocido por qué algunos proyectos están marcados como "undefined" o "canceled", aunque algunos proyectos "cancelados" también habían alcanzado su objetivo, superando la meta planteada es desconocido el motivo de su cancelación.
+En la comparación entre el promedio del ratio de dinero recogido en cada uno de los casos de éxito, fracaso o cancelación de un proyecto y donde los promedios por debajo de 1 indican que no se completo el objetivo, por encima que se supero el objetivo. Aquí -Sucess- y -Failed- muestran los comportamientos esperados mientras que las campañas canceladas, superan por poco el 1 lo que muestra que están algo balanceados.
 
+Lamentablemente es desconocido por qué algunos proyectos están marcados como -undefined- o -canceled-, aunque algunos proyectos "cancelados" también habían alcanzado su objetivo, superando la meta planteada es desconocido el motivo de su cancelación.
+
+Aun con esto se vio que el comportamiento de las campañas cancelados se asemeja mas al de campañas fallidas que al de las exitosas, así que se decidió agrupar las campañas canceladas junto con las fallidas.
 
 \begin{figure}[H]
     \centering
@@ -535,51 +537,47 @@ Lamentablemente es desconocido por qué algunos proyectos están marcados como "
     \caption{Proporción del éxito,fracaso y cancelación de un proyecto. }
 \end{figure}
 
-En el conjunto de datos también existen otros estados como "Live" en el cual el proyecto aún no cumple las fechas para su cierre, pero no son representativos por su baja concentración.
+En el conjunto de datos también existen otros estados como -Live- en el cual el proyecto aún no cumple las fechas para su cierre, pero no son representativos por su baja concentración.
 
-
-Podemos observar la concentración de propuestas  en cada uno de los cuatro trimestres del año, también la proporción de éxito y fracaso, Con una notable concentración de presentación de proyectos creativos  para la financiación en el último trimestre del año, aunque esto no implica el éxito de estas propuestas que en su mayoría no logran alcanzar su objetivo.
-
-\begin{figure}[H]
-    \centering
-    \captionsetup{justification=centering}
-\includegraphics[width=\linewidth]{Images/MeanPerQuarter.png}
-    \caption{Promedio del éxito y fracaso trimestralmente. }
-\end{figure}
-
-
-Podemos observar gráficamente el comportamiento de la frecuencia de los objetivos exitosos, fallidos y cancelados estos dos últimos bajo un mismo  estado, para cada uno de los trimestres del año. Además de obtener el polígono de frecuencias que representa el comportamiento de la distribución de los objetivos para cada estado a través del año.
-
+Con las nuevas agrupaciones en los proyectos, cuando agrupamos las campañas en cuartiles basado en el objetivo de cada una de estas, calculamos la media de cada uno de los cuartiles y podremos apreciar la diferencia de objetivos entre las campañas exitosas y las fallidas donde se nota que a mayores objetivos, tienden a haber menos campañas exitosas y la cantidad de campañas fallidas aumenta.
 
 \begin{figure}[H]
     \centering
     \captionsetup{justification=centering}
 \includegraphics[width=\linewidth]{Images/GoalDistribution.png}
-    \caption{Distribución del cumplimiento de los proyectos. }
+    \caption{Distribución del cumplimiento de las campañas. }
 \end{figure}
 
+Otro dato que se analizo es el tiempo de duración de las campañas, el dataset originalmente solo trate la fecha de inicio de la campaña y su DeadLine, calculamos para cada uno de las campañas su duración -Time Delta-, y con esto agrupamos las campañas por cuartiles donde podemos ver el comportamiento de las campañas basado en su duración.
 
+\begin{figure}[H]
+    \centering
+    \captionsetup{justification=centering}
+\includegraphics[width=\linewidth]{Images/dias.png}
+    \caption{Distribución de la duración de las campañas. }
+\end{figure}
 
+Según la gráfica, en cada uno de los cuartiles, el promedio de la cantidad de días de las campañas exitosas, siempre es mucho menor que la de las campañas fallidas. Esto nos indica que entre mas larga sea la campaña, mas tiende a fallar.
 
-\section{Prediciendo el exito de un proyecto}
-La exploracion de datos fue basada en un Kernel para este dataset donde se explicaba el comportamiento de las características y se realizaba un clasificador simple de regresion lineal para la predicción del exito. Los resultados de este Kernel tenían un Accuracy del 64\%. Nosotros usaremos estos resultados para comparar nuestros clasificadores, los cuales fueron implementados usando Random Forest y una red neuronal usando Perceptrones Multicapa.
+\section{Prediciendo el éxito de un proyecto}
+La exploración de datos fue basada en un Kernel para este dataset donde se explicaba el comportamiento de las características y se realizaba un clasificador simple de regresión lineal para la predicción del éxito. Los resultados de este Kernel tenían un Accuracy del 64\%. Nosotros usaremos estos resultados para comparar nuestros clasificadores, los cuales fueron implementados usando Random Forest y una red neuronal usando Perceptrones Multicapa.
 
 \subsection{Selección de las categorías}
-Como se vio en la sección anterior, podemos agrupar los proyectos cancelados y fallidos en un mismo grupo como los fallidos. En el Kernel en el que nos basamos, solo tomaron las categorías principales, ignorando las 159 sub-categorias, pero como vimos en la primera sección, usando solo las categorías principales no muestra el verdadero comportamiento de la popularidad, debido a que algunas sub-categorias son mucho mas populares que otras.
+Como se vio en la sección anterior, podemos agrupar los proyectos cancelados y fallidos en un mismo grupo como los fallidos. En el Kernel en el que nos basamos, solo tomaron las categorías principales, ignorando las 159 sub-categorías, pero como vimos en la primera sección, usando solo las categorías principales no muestra el verdadero comportamiento de la popularidad, debido a que algunas sub-categorías son mucho mas populares que otras.
 
-La característica que representa al país, y la moneda que usa la campaña, pueden hacer parte del grupo de características que nos ayudan en la predicción. Una categoría original es la que representa la duración del proyecto, ya que como vimos previamente hay una clara diferencia entre el promedio de días de un proyecto exitoso y uno fallido. Además se uso el valor que incluye el dataset del objetivo de la campaña, convertido a Dolares, para tener una medida general para todos los proyectos.
+La característica que representa al país, y la moneda que usa la campaña, pueden hacer parte del grupo de características que nos ayudan en la predicción. Una característica original es la que representa la duración del proyecto, ya que como vimos previamente hay una clara diferencia entre el promedio de días de un proyecto exitoso y uno fallido. Además se uso el valor que incluye el dataset del objetivo de la campaña, convertido a -USD-, para tener una medida general para todos los proyectos.
 
 \subsection{Clasificadores}
-Cada campaña tiene su propia meta de dinero a conseguir, pero dependiendo de la categoría de la campaña, es posible que cierta cantidad de dinero, la cual puede variar debido a esto. Por lo tanto no se pueden comparar como tal las metas entre categorías. Para ello se realizo un escalamiento de los datos comparándolo con el valor de la meta en dolares. Además, debido a que hay demasiadas variables independientes (Cada una de las subcategorias, países y moneda), se hizo uso de una función que convierte las variables categoricas en variables Dummies, donde cada variable independiente se convierte en una característica binaria dentro de nuestro modelo.
+Cada campaña tiene su propia meta de dinero a conseguir, pero dependiendo de la categoría de la campaña, es posible que cierta cantidad de dinero, la cual puede variar debido a esto. Por lo tanto no se pueden comparar como tal las metas entre categorías. Para ello se realizo un escalamiento de la meta de cada campaña usando el valor en dolares del Dataset. Además, debido a que hay demasiadas variables independientes (Cada una de las sub-categorías, países y moneda), se hizo uso de una función que convierte las variables categóricas en variables Dummies, donde cada variable independiente se convierte en una característica binaria dentro de nuestro modelo.
 
-Mediante la optimizacion de hyperparametros usando RandomizedSearchSV se buscaron los mejores parametros para el clasificador de Random Forest y el de Perceptrones Multicapa. Los mejores parametros dados por la optimizacion fueron para el clasificador Random Forest:
+Mediante la optimización de hyperparametros usando RandomizedSearchSV se buscaron los mejores parámetros para el clasificador de Random Forest y el de Perceptrones Multicapa. Los mejores parámetros dados por la optimización fueron para el clasificador Random Forest:
 
 \begin{itemize}
 	\item \textbf{n estimators:} 20
 	\item \textbf{max depth:} 25
 \end{itemize}
 
-Para el clasificador de Perceptrones Multicapa, los mejores parametros fueron:
+Para el clasificador de Perceptrones Multicapa, los mejores parámetros fueron:
 \begin{itemize}
 	\item \textbf{Alpha:} = $10^{-7}$
 	\item \textbf{Hidden layer sizes:} 14
@@ -602,14 +600,14 @@ Al final, después de tener un subconjunto datos de entrenamiento y uno de prueb
 Donde ambos clasificadores mostraron resultados muy similares.
 
 \subsection{Análisis de los Resultados}
-Una buena utilidad que nos da el clasificador de RandomForest, es que nos puede dar una buena idea de las características que mas influyen al éxito o fracaso de un proyecto. Las características mas importantes halladas fueron:\\
+Una buena utilidad que nos da el clasificador de RandomForest, es que nos puede dar una buena idea de las características que mas influyen al éxito o fracaso de un proyecto. Las características mas importantes halladas fueron:
 
 
 \begin{tabular}{ ||p{4cm}||p{3cm}|| }
  \hline
- \multicolumn{2}{|c|}{Importancia de las caracteristicas} \\
+ \multicolumn{2}{|c|}{Importancia de las características} \\
  \hline
- Caracteristicas & Porcentaje (\%) \\
+ Características & Porcentaje (\%) \\
  \hline
  usd\_goal\_real    & 0.374131 \\
  Time\_Delta       &  0.228826\\
@@ -624,8 +622,65 @@ Una buena utilidad que nos da el clasificador de RandomForest, es que nos puede 
 
  \hline
 \end{tabular}\\
+\\
 
-Donde se puede apreciar que el tiempo de duración del proyecto y la meta que tienen es lo que decide si una campaña es exitosa o no. Según los datos analizados en las secciones anteriores, se mostró que entre mas alta es la meta, la cantidad de proyectos fallidos aumenta, y que los proyectos exitosos duran menos en promedio que los proyectos fallidos. Las características que afectan el exito de un proyecto, aunque no estan al mismo nivel que las dos anteriores, son las mas populares, donde es normal que sea asi, ya que en estas categorias es donde se consigue la mayor cantidad de apoyos.
+Donde se puede apreciar que el tiempo de duración del proyecto y la meta que tienen es lo que decide si una campaña es exitosa o no. Según los datos analizados en las secciones anteriores, se mostró que entre mas alta es la meta, la cantidad de proyectos fallidos aumenta, y que los proyectos exitosos duran menos en promedio que los proyectos fallidos. Las características que afectan el éxito de un proyecto, aunque no están al mismo nivel que las dos anteriores, son las mas populares, donde es normal que sea así, ya que en estas categorías es donde se consigue la mayor cantidad de apoyos.
+\subsection{Evaluación del Desempeño}
+Con el objetivo de conocer el desempeño de nuestro clasificador, se mide cuantitativamente cuantas predicciones fueron correctas.podemos visualizar esta información usando la matriz de confusión, la cual es una clase especial de tabla de contingencia en la cual se comparan las clases reales contra las clases predichas por cada uno de los clasificadores. Para el clasificador de Perceptrones MultiCapa fueron:\\
+
+\begin{tabular}{ ||p{3cm}||p{3cm}|| }
+ \hline
+ \multicolumn{2}{|c|}{matriz de confusión MLP} \\
+ \hline
+ 21424 & 3014 \\
+ \hline
+ 8672 & 4757 \\
+ \hline
+\end{tabular} \\
+
+
+Y sus medidas de desempeño fueron:
+\begin{itemize}
+	\item \textbf{Precisión:} 0.612
+	\item \textbf{Recall:} 0.354
+	\item \textbf{F\_1 score:} 0.448
+	
+\end{itemize}
+
+\hspace{2em}
+
+Para el clasificador de RandomForest se obtuvo:
+
+
+\hspace{2em}
+
+\begin{tabular}{ ||p{3cm}||p{3cm}|| }
+ \hline
+ \multicolumn{2}{|c|}{matriz de confusión RF} \\
+ \hline
+ 21953 & 2485  \\
+ \hline
+ 9288   & 4141 \\
+ \hline
+\end{tabular}\\
+
+Con sus respectivas medidas de desempeño:
+
+\begin{itemize}
+	\item \textbf{Precisión:} 0.624
+	\item \textbf{Recall:} 0.308
+	\item \textbf{F\_1 score:} 0.413
+	
+\end{itemize}
+
+	
+Como se puede observar dentro de la matriz de confusión,la primera columna de las dos matrices representa en la parte superior los aciertos para la clase de campañas no exitosas y justo debajo las equivocaciones para estas campañas no exitosas.
+
+A su vez en la segunda columna de las matrices, aparecen en la parte superior las equivocaciones para campañas exitosas y justo debajo los aciertos para la clase de campañas exitosas.
+Para la evaluación de  la precisión y el índice de recuperación de nuestros clasificadores: Los valores obtenidos en Precisión: Es el valor obtenido que representa la habilidad del clasificador para  no clasificar una muestra como positiva cuando es negativa, El Recall: Es la capacidad del clasificador de encontrar todas las muestras para las clases Exitosas y no exitosas, También llamado índice de recuperación. Y F1 como el promedio pesado de precisión y Recall. 
+
+Con todas estas estadisticas y ejecutando las predicciones multiples veces, el clasificador que nos dio mejores resultados fue el que esta basado sobre una red neuronal, el de los Perceptrones Multicapa, pero el de Random Forest no se quedo demasiado atras.
+
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -724,8 +779,9 @@ Donde se puede apreciar que el tiempo de duración del proyecto y la meta que ti
 
 
 
-\section{Conclusion}
-The conclusion goes here.
+\section{Conclusión}
+Según lo visto, el éxito o fracaso de una campaña depende principalmente de la meta que tengan y la cantidad de días que se planea mantener viva la campaña. Entre mas larga sea la campaña, mas probabilidad hay de fracasar, al igual que la meta, si es muy alta, también fallara. Dependiendo de la categoría también puede afectar el resultado de la campaña, donde las categorías mas populares, tienen mas personas que podrían apoyar a la campaña y se puede conseguir una mayor cantidad de Backers. Así que al crear una campaña, hay que considerar no usar valores tan altos en la categoría que entre la campaña, para así no mermar sus posibilidades de éxito.
+El uso de la optimización de hyperparametros usando RandomizedSearchSV fue una de las herramientas indispensable para obtener un mayor numero de aciertos, buscando los mejores parámetros para cada clasificador como se pudo observar en la sección de clasificadores de la quinta sección de este documento.
 
 
 
@@ -745,10 +801,6 @@ The conclusion goes here.
 % starts a section numbered zero.)
 %
 
-\section*{Reconocimientos}
-
-
-The authors would like to thank...
 
 
 % Can use something like this to put references on a page
@@ -785,7 +837,10 @@ The authors would like to thank...
 
 \bibitem{IEEEhowto:kopka}
 Kromel. Kickstarter - Successful vs Failed | Kaggle. [online] Available at: https://www.kaggle.com/kromel/kickstarter-successful-vs-failed [Accessed 24 Jul. 2019].
-
+\bibitem{IEEEhowto:kopka}
+" clasificación lineal evaluación desempeño",Notas de clase introducción a los sistemas inteligentes, Departamento Sistemas e industrial, Universidad Nacional de Colombia Sede Bogota, 2019-1.
+\bibitem{IEEEhowto:kopka}
+sklearn.neural\_network.MLPClassifier.[online] Available at: https://scikit-learn.org/stable/modules/generated/sklearn.neural\_network.MLPClassifier   [Accessed 23 Jul. 2019]
 \end{thebibliography}
 
 % biography section
